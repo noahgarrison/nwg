@@ -136,8 +136,8 @@ public class BaseMod {
  	public final static Item BrightSteelIngot = new BrightSteelIngot(511);
  	
  		//Block Declarations
- 	public static Block BrightFurnaceIdle = new BrightFurnace(1256, false).setUnlocalizedName("brightFurnaceIdle").setLightValue(0.0f);
-	public static Block BrightFurnaceActive = new BrightFurnace(1257, true).setUnlocalizedName("brightFurnaceActive").setLightValue(1.0f);
+ 	public static Block BrightFurnaceIdle = new BrightFurnace(1256).setUnlocalizedName("brightFurnaceIdle").setLightValue(0.0f);
+	public static Block BrightFurnaceActive = new BrightFurnace(1257).setUnlocalizedName("brightFurnaceActive").setLightValue(1.0f);
 	public final Block strongBox = new strongBox(758, 1)
 	 .setLightValue(10.0f)
 	 .setCreativeTab(tabBright)
