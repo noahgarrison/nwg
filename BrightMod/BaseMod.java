@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraftforge.common.Configuration;
 import net.minecraft.item.Item;
+import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,7 +24,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid=ModInfo.ID, name=ModInfo.NAME, version=ModInfo.VER)
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class BaseMod {
-
+	
 	private static final int NuggetID = 0;
 
 	@Instance(ModInfo.ID)
@@ -66,7 +67,10 @@ public class BaseMod {
     	config.save();
     }
     
-     
+    public static Item BrightHelmet;
+	public static Item BrightChestplate;
+	public static Item BrightLegs;
+	public static Item BrightBoots;
     
      	//WorldGen Helper
 	 EventManager oreManager = new EventManager();
@@ -79,8 +83,16 @@ public class BaseMod {
  };
 		//Bright Tool Mat. Declaration
 	public EnumToolMaterial bright = EnumHelper.addToolMaterial("Bright", 3, 2500, 12.0f, 10.0f, 25);
-
+	
+		//Bright Armor Material Declaration
+	public static EnumArmorMaterial brightArmor = EnumHelper.addArmorMaterial("brightArmorMaterial", 2500, new int[] {3, 7, 6, 3}, 30);
+	public static Item brightChest;
+	public static Item brightBoots;
+	public static Item brightLegs;
+	public static Item brightHelm;
+	
 		//Item Creation
+
 	public final Item powderAir = new powderAir(2345);
 	public final Item brightSword = new brightSword(864 , bright)
  		.setCreativeTab(BaseMod.tabBright)
@@ -133,7 +145,15 @@ public class BaseMod {
  	 .setCreativeTab(BaseMod.tabBright)
  	 .setUnlocalizedName("shovelBright")
  	 .setTextureName(ModInfo.LOC + ":BrightShovel");
- 	public final static Item BrightSteelIngot = new BrightSteelIngot(511);
+ 	public final static Item BrightSteelIngot = new BrightSteelIngot(511); //Err: "Syntax error on token ";",{ expected after this token"
+ 	
+ 	//Gives same error on line preceding armor declaration, anywhere inside or outside preinit
+ 	
+ 	
+ 	brightHelm = new brightArmor(2055, BrightArmor, 5, 0).setUnlocalizedName("brightHelmet");
+	brightChest = new brightArmor(2056, BrightArmor, 5, 1).setUnlocalizedName("brightChestplate");
+	brightLegs = new brightArmor(2057, BrightArmor, 5, 2).setUnlocalizedName("brightLeggings");
+	brightBoots = new brightArmor(2058, BrightArmor, 5, 3).setUnlocalizedName("brightBoots");
  	
  		//Block Declarations
  	public static Block BrightFurnaceIdle = new BrightFurnace(1256).setUnlocalizedName("brightFurnaceIdle").setLightValue(0.0f);
@@ -160,6 +180,10 @@ public class BaseMod {
 	 .setLightValue(10.0f); 	
 	public final static Block brightOre = new BrightOre(510, Material.rock)
 	 .setTextureName(ModInfo.LOC + ":BrightOre"); 
+	
+	
+	
+	public static nwgCraftingHandler craftingHandler = new nwgCraftingHandler();
 	
     @EventHandler
     public void load(FMLInitializationEvent event) {
@@ -273,7 +297,7 @@ public class BaseMod {
             GameRegistry.addShapelessRecipe(brightStickIS, Item.stick, BaseMod.BrightSteelIngot, Item.diamond);
             
             	//Smelting Recipes
-            GameRegistry.addSmelting(BrightOreID, ItemStackBrightSteelIngot, 1.0f);
+            GameRegistry.addSmelting(BrightOreID, BrightSteelItemStack, 1.0f);
             GameRegistry.addSmelting(BaseMod.netherBrightOre.blockID, BrightSteelOre, 10.0f);
             
             	//World Gen. Stuff

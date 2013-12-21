@@ -19,7 +19,7 @@ public class BrightFurnace extends Block{
 	}
 
 	//Setting Texture For Block
-	@SideOnly(Side.CLIENT)
+	//@SideOnly(Side.CLIENT)
 	//Add Code Here
 	
 }
