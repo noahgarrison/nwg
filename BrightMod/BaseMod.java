@@ -10,6 +10,7 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -98,11 +99,12 @@ public class BaseMod {
  		.setCreativeTab(BaseMod.tabBright)
  		.setUnlocalizedName("swordBright")
  		.setTextureName(ModInfo.LOC + ":BrightSword");
-	public final Item toolHammer = new toolHammer(12345)
+	public final static Item toolHammer = new toolHammer(12345)
 	 	.setUnlocalizedName("toolHammer")
 	 	.setCreativeTab(tabBright)
-	 	.setMaxDamage(50)
-	 	.setTextureName(ModInfo.LOC + ":Hammer");
+	 	.setMaxDamage(10)
+	 	.setTextureName(ModInfo.LOC + ":Hammer")
+	 	.setMaxStackSize(1);
 	public final Item ironMesh = new ironMesh(12456)
 	    .setCreativeTab(tabBright)
 	    .setMaxStackSize(8)
@@ -129,31 +131,32 @@ public class BaseMod {
 	public final Item brightWand = new brightWand(598);
 	public final Item brightStick = new brightStick(753);
 	public final Item brightNugget = new brightNugget(NuggetID);
-	public final Item brightAxe = new brightAxe(5003, bright)
+	public final Item brightAxe = new brightAxe(5023, bright)
  	 .setCreativeTab(BaseMod.tabBright)
  	 .setUnlocalizedName("axeBright")
  	 .setTextureName(ModInfo.LOC + ":BrightAxe");
- 	public final Item brightPick = new brightPick(502, bright)
+ 	public final Item brightPick = new brightPick(5002, bright)
  	.setCreativeTab(BaseMod.tabBright)
  	.setUnlocalizedName("pickBright")
  	.setTextureName(ModInfo.LOC + ":BrightPickaxe");
- 	public final Item brightHoe = new brightHoe(503, bright)
+ 	public final Item brightHoe = new brightHoe(5003, bright)
  	.setCreativeTab(BaseMod.tabBright)
  	.setUnlocalizedName("hoeBright")
  	.setTextureName(ModInfo.LOC + ":BrightHoe");
- 	public final Item brightShovel = new brightShovel(504, bright)
+ 	public final Item brightShovel = new brightShovel(5004, bright)
  	 .setCreativeTab(BaseMod.tabBright)
  	 .setUnlocalizedName("shovelBright")
  	 .setTextureName(ModInfo.LOC + ":BrightShovel");
- 	public final static Item BrightSteelIngot = new BrightSteelIngot(511); //Err: "Syntax error on token ";",{ expected after this token"
+ 	public final static Item BrightSteelIngot = new BrightSteelIngot(5101); //Err: "Syntax error on token ";",{ expected after this token"
  	
  	//Gives same error on line preceding armor declaration, anywhere inside or outside preinit
  	
  	
- 	brightHelm = new brightArmor(2055, BrightArmor, 5, 0).setUnlocalizedName("brightHelmet");
-	brightChest = new brightArmor(2056, BrightArmor, 5, 1).setUnlocalizedName("brightChestplate");
-	brightLegs = new brightArmor(2057, BrightArmor, 5, 2).setUnlocalizedName("brightLeggings");
-	brightBoots = new brightArmor(2058, BrightArmor, 5, 3).setUnlocalizedName("brightBoots");
+ 	public static Item brightHelmet = new brightArmor(2055, brightArmor, 5, 0).setUnlocalizedName("brightHelmet");
+	public static Item brightChestplate = new brightArmor(2056, brightArmor, 5, 1).setUnlocalizedName("brightChestplate");
+	public static Item brightLeggings = new brightArmor(2057, brightArmor, 5, 2).setUnlocalizedName("brightLeggings");
+	public static Item brightBoot = new brightArmor(2058, brightArmor, 5, 3).setUnlocalizedName("brightBoots");
+	
  	
  		//Block Declarations
  	public static Block BrightFurnaceIdle = new BrightFurnace(1256).setUnlocalizedName("brightFurnaceIdle").setLightValue(0.0f);
@@ -214,8 +217,12 @@ public class BaseMod {
             GameRegistry.registerItem(coinOnehundred, "coinOneHundred");
             GameRegistry.registerItem(coinTwohundred, "coinTwoHundred");
             
+            //Renderer
+            RenderingRegistry.addNewArmourRendererPrefix("brightArmor");
+            
             //LanguageRegistry Declarations- Adding Names
             LanguageRegistry.addName(ironMesh, "Iron Mesh");
+            LanguageRegistry.addName(toolHammer, "Iron Hammer");
             LanguageRegistry.addName(powderAir, "Air Powder");
             LanguageRegistry.addName(netherBrightOre, "Nether Bright Ore");
             LanguageRegistry.addName(brightNugget, "Bright Nugget");
@@ -241,11 +248,26 @@ public class BaseMod {
             ItemStack leatherItemstack = new ItemStack(Item.leather);
             ItemStack brownWoolItemstack = new ItemStack(Block.cloth, 1, 12);
             ItemStack saddleStack = new ItemStack(Item.saddle);
-            ItemStack chainIS = new ItemStack(this.ironMesh);
+            
+			ItemStack chainIS = new ItemStack(this.ironMesh);
             ItemStack ingotIronIS = new ItemStack(Item.ingotIron);
-            ItemStack hammerIS = new ItemStack(this.toolHammer);
+            
+			ItemStack hammerIS = new ItemStack(this.toolHammer, 1, 0);
+			ItemStack hammerIS1 = new ItemStack(this.toolHammer, 1, 1);
+			ItemStack hammerIS2 = new ItemStack(this.toolHammer, 1, 2);
+			ItemStack hammerIS3 = new ItemStack(this.toolHammer, 1, 3);
+			ItemStack hammerIS4 = new ItemStack(this.toolHammer, 1, 4);
+			ItemStack hammerIS5 = new ItemStack(this.toolHammer, 1, 5);
+			ItemStack hammerIS6 = new ItemStack(this.toolHammer, 1, 6);
+			ItemStack hammerIS7 = new ItemStack(this.toolHammer, 1, 7);
+			ItemStack hammerIS8 = new ItemStack(this.toolHammer, 1, 8);
+			ItemStack hammerIS9 = new ItemStack(this.toolHammer, 1, 9);
+			ItemStack hammerIS10 = new ItemStack(this.toolHammer, 1, 10);
             ItemStack stickIS = new ItemStack(Item.stick);
             ItemStack chainBootsIS = new ItemStack(Item.bootsChain);
+            ItemStack chainHelmIS = new ItemStack(Item.helmetChain);
+            ItemStack chainChestIS = new ItemStack(Item.plateChain);
+            ItemStack chainLegsIS = new ItemStack(Item.legsChain);
             ItemStack BrightSteelItemStack = new ItemStack(BrightSteelIngot);
             ItemStack brightRockStack = new ItemStack(brightRock);
             ItemStack ItemStackBrightSteelIngot = new ItemStack(BrightSteelIngot, 9);
@@ -267,11 +289,22 @@ public class BaseMod {
             ItemStack skullISII = new ItemStack(Item.skull, 1, 2);
             ItemStack skullISIII = new ItemStack(Item.skull, 1, 3);
             ItemStack skullISIV = new ItemStack(Item.skull, 1, 4);
+            ItemStack StrongBoxIS = new ItemStack(this.strongBox);
+            ItemStack IronHorseArmorIS = new ItemStack(Item.horseArmorIron);
+            ItemStack GoldHorseArmorIS = new ItemStack(Item.horseArmorGold);
+            ItemStack DiamondHorseArmorIS = new ItemStack(Item.horseArmorDiamond);
             
             	//New Recipes
+            GameRegistry.addShapelessRecipe(StrongBoxIS, Block.chest, Block.obsidian);
+            GameRegistry.addRecipe(DiamondHorseArmorIS, "  X", "XYX", "XXX", 'X', Item.diamond, 'Y', GoldHorseArmorIS);
+            GameRegistry.addRecipe(GoldHorseArmorIS, "  X", "XYX", "XXX", 'X', Item.ingotGold, 'Y', IronHorseArmorIS);
+            GameRegistry.addRecipe(IronHorseArmorIS, "  X", "XYX", "XXX", 'X', Item.ingotIron, 'Y', chainChestIS);
             GameRegistry.addRecipe(saddleStack, "LLL", "LWL", 'L', leatherItemstack, 'W', brownWoolItemstack);
             GameRegistry.addRecipe(hammerIS, "   ", "X  ", " Y ", 'X', ingotIronIS, 'Y', stickIS);
             GameRegistry.addRecipe(chainBootsIS, "X X", "X X", 'X', this.ironMesh);
+            GameRegistry.addRecipe(chainHelmIS, "XXX", "X X", 'X', this.ironMesh);
+            GameRegistry.addRecipe(chainChestIS, "X X", "XXX", "XXX", 'X', this.ironMesh);
+            GameRegistry.addRecipe(chainLegsIS, "XXX", "X X", "X X", 'X', this.ironMesh);
             GameRegistry.addRecipe(brightRockStack, "XXX", "XXX", "XXX", 'X', BrightSteelItemStack);
             GameRegistry.addRecipe(axeIS, " XX", " YX", " Y ", 'X', BrightSteelItemStack, 'Y', brightStickIS);
             GameRegistry.addRecipe(pickIS, "XXX", " Y ", " Y ", 'X', BrightSteelItemStack, 'Y', brightStickIS);
@@ -288,13 +321,23 @@ public class BaseMod {
             
             	//Shapeless Recipes
             GameRegistry.addShapelessRecipe(chainIS, hammerIS, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS1, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS2, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS3, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS4, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS5, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS6, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS7, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS8, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS9, ingotIronIS);
+            GameRegistry.addShapelessRecipe(chainIS, hammerIS10, ingotIronIS);
             GameRegistry.addShapelessRecipe(ItemStackBrightSteelIngot, brightRockStack);
             GameRegistry.addShapelessRecipe(nuggetIS, this.BrightSteelIngot);
             GameRegistry.addShapelessRecipe(skullISII, skullISI);
             GameRegistry.addShapelessRecipe(skullISIII, skullISII);
             GameRegistry.addShapelessRecipe(skullISIV, skullISIII);
             GameRegistry.addShapelessRecipe(skullISI, skullISIV);
-            GameRegistry.addShapelessRecipe(brightStickIS, Item.stick, BaseMod.BrightSteelIngot, Item.diamond);
+            GameRegistry.addShapelessRecipe(brightStickIS, Item.stick, BaseMod.BrightSteelIngot, Item.netherQuartz);
             
             	//Smelting Recipes
             GameRegistry.addSmelting(BrightOreID, BrightSteelItemStack, 1.0f);
