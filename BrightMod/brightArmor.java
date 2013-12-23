@@ -17,11 +17,11 @@ public class brightArmor extends ItemArmor{
 			int layer) {
 			if (stack.itemID == BaseMod.brightHelmet.itemID
 			|| stack.itemID == BaseMod.brightChestplate.itemID
-			|| stack.itemID == BaseMod.brightBoots.itemID) {
-			return ModInfo.LOC + ":armor:brightArmor_1";
+			|| stack.itemID == BaseMod.brightBoot.itemID) {
+			return ModInfo.LOC + ":brightArmor_1";
 			}
 			if (stack.itemID == BaseMod.brightLeggings.itemID) {
-			return ModInfo.LOC + ":armor:brightArmor_2";
+			return ModInfo.LOC + ":brightArmor_2";
 			} else {
 			return null;
 			}

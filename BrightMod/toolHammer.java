@@ -15,9 +15,9 @@ public class toolHammer extends Item {
 		return false;
 	}
 	
-	public ItemStack getContainerItemStack(ItemStack itemstack)
+	public ItemStack getContainerItemStack(ItemStack itemstack1)
 	{
-		ItemStack itemstack1 = new ItemStack(BaseMod.toolHammer, 1, (itemstack.getItemDamage() + 1));
+		ItemStack itemstack = new ItemStack(this, 1, (itemstack1.getItemDamage() + 1));
 		
 		return itemstack1;
 		

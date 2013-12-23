@@ -6,7 +6,7 @@ public class coin extends Item {
 
 	public coin(int id) {
 		super(id);
-		setMaxStackSize(64);
+		setMaxStackSize(32);
 		setCreativeTab(BaseMod.tabBright);
 	}
 
