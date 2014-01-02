@@ -10,6 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import nwg.BrightMod.block.BrightOre;
+import nwg.BrightMod.block.GlowRock;
+import nwg.BrightMod.block.blockSlime;
+import nwg.BrightMod.item.coin;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -34,43 +38,45 @@ public class BaseMod {
     @SidedProxy(clientSide=ModInfo.CLIENTPROXY + "ClientProxy", serverSide=ModInfo.COMMONPROXY + "CommonProxy")
     public static CommonProxy proxy;
     
-    public static int grinderID;
-    public static int grinderActiveID;
-    public static int NetherOreID;
-    public static int OreID;
-    public static int BlockCompressedID;
-    public static int PickID;
-    public static int SpadeID;
-    public static int HoeID;
-    public static int AxeID;
-    public static int NuggetID;
-    public static int IngotID;
-    public static int StickID;
-    public static int SwordID;
-    public static int WandID;
-    public static int PowderID;
-    public static int HammerID;
-    public static int MeshID;
-    public static int CoinOneID;
-    public static int CoinOneHundredID;
-    public static int CoinTwentyFiveID;
-    public static int CoinTwoHundredID;
-    public static int FiveHundredID;
-    public static int OneThousandID;
-    public static int StrongBoxID;
-    public static int HelmetID;
-    public static int ChestplateID;
-    public static int LeggingID;
-    public static int BootID;
-    public static int grinderIdleID;
+    public static int grinderID = 700;
+    public static int grinderActiveID = 701;
+    public static int NetherOreID = 702;
+    public static int OreID = 703;
+    public static int BlockCompressedID = 704;
+    public static int StrongBoxID = 705;
+    public static int grinderIdleID = 706;
+    public static int flopperID = 707;
+    public static int PickID = 708;
+    public static int SpadeID = 709;
+    public static int HoeID = 710;
+    public static int AxeID = 711;
+    public static int NuggetID = 712;
+    public static int IngotID = 713;
+    public static int StickID = 714;
+    public static int SwordID = 715;
+    public static int WandID = 716;
+    public static int PowderID = 717;
+    public static int HammerID = 718;
+    public static int MeshID = 719;
+    public static int CoinOneID = 720;
+    public static int CoinOneHundredID = 721;
+    public static int CoinTwentyFiveID = 723;
+    public static int CoinTwoHundredID = 724;
+    public static int FiveHundredID = 725;
+    public static int OneThousandID = 726;
+    public static int HelmetID = 727;
+    public static int ChestplateID = 728;
+    public static int LeggingID = 729;
+    public static int BootID = 730;
+    public static int sludgeID = 731;
+    public static int fertID = 732;
+    public static int fertBlockID = 733;
+    public static int slimeBlockID = 734;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
-    	
-    	
-    	//Config Handlers
-    	Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+    	//Config Handlers, broken
+    	/*Configuration config = new Configuration(event.getSuggestedConfigurationFile());
     	config.load();
     	
     	//Get BlockID's from CFG
@@ -96,6 +102,7 @@ public class BaseMod {
 		PowderID = config.getItem("AirPowder", 5009).getInt();
 		HammerID = config.getItem("Hammer", 5010).getInt();
 		MeshID = config.getItem("IronMesh", 5011).getInt();
+		sludgeID = config.getItem("Sludge", 5022).getInt();
 		
 		//Get CoinID's from CFG
 		CoinOneID = config.getItem("CoinOne", 5012).getInt();
@@ -111,7 +118,7 @@ public class BaseMod {
     	LeggingID = config.getItem("Leggings", 5020).getInt();
     	BootID = config.getItem("Boots", 5021).getInt();
     	
-		config.save();
+		config.save();*/
     }
     
     //CraftingHandler, Armor and Tool Types, WorldGen, CreativeTab, GUI Handler, 
@@ -127,64 +134,54 @@ public class BaseMod {
 	public static EnumArmorMaterial brightArmor = EnumHelper.addArmorMaterial("brightArmorMaterial", 2500, new int[] {3, 7, 6, 3}, 30);
 	
 	//Item Creation
-	public final Item powderAir = new powderAir(PowderID);
-	public final Item brightSword = new brightSword(SwordID , bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("swordBright").setTextureName(ModInfo.LOC + ":BrightSword");
-	public final static Item toolHammer = new toolHammer(HammerID).setUnlocalizedName("toolHammer").setCreativeTab(tabBright).setMaxDamage(10).setTextureName(ModInfo.LOC + ":Hammer").setMaxStackSize(1);
-	public final Item ironMesh = new ironMesh(MeshID).setCreativeTab(tabBright).setMaxStackSize(8).setTextureName(ModInfo.LOC + ":chainMail").setUnlocalizedName("meshIron");
+	public final Item sludgeDirt = new nwg.BrightMod.block.sludgeDirt(sludgeID);
+	public final Item powderAir = new nwg.BrightMod.item.powderAir(PowderID);
+	public final Item brightSword = new nwg.BrightMod.item.brightSword(SwordID , bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("swordBright").setTextureName(ModInfo.LOC + ":BrightSword");
+	public final static Item toolHammer = new nwg.BrightMod.item.toolHammer(HammerID).setUnlocalizedName("toolHammer").setCreativeTab(tabBright).setMaxDamage(10).setTextureName(ModInfo.LOC + ":Hammer").setMaxStackSize(1);
+	public final Item ironMesh = new nwg.BrightMod.item.ironMesh(MeshID).setCreativeTab(tabBright).setMaxStackSize(8).setTextureName(ModInfo.LOC + ":chainMail").setUnlocalizedName("meshIron");
 	public final Item coinOne = new coin(CoinOneID).setUnlocalizedName("coinOne").setTextureName(ModInfo.LOC + ":unum");
 	public final Item coinOnehundred = new coin(CoinOneHundredID).setUnlocalizedName("coinHundred").setTextureName(ModInfo.LOC + ":cent");
 	public final Item coinTwentyfive = new coin(CoinTwentyFiveID).setUnlocalizedName("coinTwentyFive").setTextureName(ModInfo.LOC + ":viginti quinque");
 	public final Item coinTwohundred = new coin(CoinTwoHundredID).setUnlocalizedName("coinTwoHundred") .setTextureName(ModInfo.LOC + ":ducenti");
 	public final Item coinFivehundred = new coin(FiveHundredID).setUnlocalizedName("coinFiveHundred").setTextureName(ModInfo.LOC + ":quingenti");
 	public final Item coinOnethousand = new coin(OneThousandID).setUnlocalizedName("coinThousand").setTextureName(ModInfo.LOC + ":millia");
-	public final Item brightWand = new brightWand(WandID);
-	public final Item brightStick = new brightStick(StickID);
-	public final Item brightNugget = new brightNugget(NuggetID);
-	public final Item brightAxe = new brightAxe(AxeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("axeBright").setTextureName(ModInfo.LOC + ":BrightAxe");
- 	public final Item brightPick = new brightPick(PickID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("pickBright").setTextureName(ModInfo.LOC + ":BrightPickaxe");
- 	public final Item brightHoe = new brightHoe(HoeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("hoeBright").setTextureName(ModInfo.LOC + ":BrightHoe");
- 	public final Item brightShovel = new brightShovel(SpadeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("shovelBright").setTextureName(ModInfo.LOC + ":BrightShovel");
- 	public final static Item BrightSteelIngot = new BrightSteelIngot(IngotID);
+	public final Item brightWand = new nwg.BrightMod.item.brightWand(WandID).setUnlocalizedName("wand").setTextureName(ModInfo.LOC + ":brightWand");
+	public final Item brightStick = new nwg.BrightMod.item.brightStick(StickID);
+	public final Item brightNugget = new nwg.BrightMod.item.brightNugget(NuggetID);
+	public final Item brightAxe = new nwg.BrightMod.item.brightAxe(AxeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("axeBright").setTextureName(ModInfo.LOC + ":BrightAxe");
+ 	public final Item brightPick = new nwg.BrightMod.item.brightPick(PickID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("pickBright").setTextureName(ModInfo.LOC + ":BrightPickaxe");
+ 	public final Item brightHoe = new nwg.BrightMod.item.brightHoe(HoeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("hoeBright").setTextureName(ModInfo.LOC + ":BrightHoe");
+ 	public final Item brightShovel = new nwg.BrightMod.item.brightShovel(SpadeID, bright).setCreativeTab(BaseMod.tabBright).setUnlocalizedName("shovelBright").setTextureName(ModInfo.LOC + ":BrightShovel");
+ 	public final static Item BrightSteelIngot = new nwg.BrightMod.item.BrightSteelIngot(IngotID);
  	
  	//Armor Creation
- 	public static Item brightHelmet = new brightArmor(HelmetID, brightArmor, 5, 0).setUnlocalizedName("brightHelmet");
-	public static Item brightChestplate = new brightArmor(ChestplateID, brightArmor, 5, 1).setUnlocalizedName("brightChestplate");
-	public static Item brightLeggings = new brightArmor(LeggingID, brightArmor, 5, 2).setUnlocalizedName("brightLeggings");
-	public static Item brightBoot = new brightArmor(BootID, brightArmor, 5, 3).setUnlocalizedName("brightBoots");
+ 	public static Item brightHelmet = new nwg.BrightMod.item.brightArmor(HelmetID, brightArmor, 5, 0).setUnlocalizedName("brightHelmet");
+	public static Item brightChestplate = new nwg.BrightMod.item.brightArmor(ChestplateID, brightArmor, 5, 1).setUnlocalizedName("brightChestplate");
+	public static Item brightLeggings = new nwg.BrightMod.item.brightArmor(LeggingID, brightArmor, 5, 2).setUnlocalizedName("brightLeggings");
+	public static Item brightBoot = new nwg.BrightMod.item.brightArmor(BootID, brightArmor, 5, 3).setUnlocalizedName("brightBoots");
 	
  	
  		//Block Declarations
 	//public final static Block BrightGrinder;
-	public final Block strongBox = new strongBox(StrongBoxID, 1).setLightValue(10.0f).setCreativeTab(tabBright).setHardness(1.0f).setUnlocalizedName("strongBox").setLightOpacity(1).setStepSound(Block.soundClothFootstep);
-	public final static Block netherBrightOre = new netherBrightOre(NetherOreID, Material.ground).setHardness(0.5f).setTextureName(ModInfo.LOC + ":NetherBrightOre").setStepSound(Block.soundStoneFootstep).setCreativeTab(BaseMod.tabBright).setLightValue(10.0f);
+	public final Block sludgeBlock = new nwg.BrightMod.block.sludgeBlock(fertBlockID, Material.ground).setCreativeTab(tabBright).setHardness(.5F).setTextureName(ModInfo.LOC + ":SludgeBlock");
+	public final Block slimeBlock = new blockSlime(slimeBlockID, Material.clay).setTextureName(ModInfo.LOC + ":slimeBlock").setUnlocalizedName("blockSlime");
+	public final Block strongBox = new nwg.BrightMod.block.strongBox(StrongBoxID, 1).setLightValue(10.0f).setCreativeTab(tabBright).setHardness(1.0f).setUnlocalizedName("strongBox").setLightOpacity(1).setStepSound(Block.soundClothFootstep);
+	public final static Block netherBrightOre = new nwg.BrightMod.block.netherBrightOre(NetherOreID, Material.ground).setHardness(0.5f).setTextureName(ModInfo.LOC + ":NetherBrightOre").setStepSound(Block.soundStoneFootstep).setCreativeTab(BaseMod.tabBright).setLightValue(10.0f);
 	public final static Block brightRock = new GlowRock(BlockCompressedID, Material.ground).setHardness(0.5f).setTextureName(ModInfo.LOC + ":BrightBlock").setStepSound(Block.soundStoneFootstep).setUnlocalizedName("brightRock").setCreativeTab(BaseMod.tabBright).setLightValue(10.0f); 	
 	public final static Block brightOre = new BrightOre(OreID, Material.rock).setTextureName(ModInfo.LOC + ":BrightOre"); 
+	public final static Block blockFlopper = new nwg.BrightMod.block.blockFlopper(flopperID, Material.iron);
 	//public final static Block BrightGrinderActive;
     @EventHandler
     public void load(FMLInitializationEvent event) {
             proxy.registerRenderers();
-            
-            //Grinder
-            //BrightGrinder = new BrightFurnace(grinderIdleID).setUnlocalizedName("brightGrinder").setLightValue(0.0f).setCreativeTab(tabBright);
-            //BrightGrinderActive = new BrightFurnace(grinderActiveID).setUnlocalizedName("brightGrinder").setLightValue(10.0f);
-            
-            
-            	//GameRegistry Declarations
-            //GameRegistry.registerBlock(BrightGrinder, "brightGrinder");
-            //GameRegistry.registerBlock(BrightGrinderActive, "brightGrinder");
-            
-            //GameRegistry.registerTileEntity(TileEntityGrinder.class, "tileEntityGrinder");
-            
-            //RenderingRegistry.registerBlockHandler(2105, RenderGrinder.INSTANCE);
-            //NetworkRegistry.instance().registerGuiHandler(this, guiHandlerFurnace)
-            
             GameRegistry.registerItem(brightNugget, "nuggetBright");
+            GameRegistry.registerBlock(slimeBlock, "blockSlime");
+            GameRegistry.registerBlock(sludgeBlock, "sludgeBlock");
             GameRegistry.registerItem(ironMesh, "meshIron");
             GameRegistry.registerItem(powderAir, "powderAir");
             GameRegistry.registerBlock(netherBrightOre, "oreNetherBright");
-            //GameRegistry.registerBlock(BrightGrinder, "brightGrinderIdle");
-            //GameRegistry.registerBlock(BrightGrinderActive, "brightGrinderActive");
             GameRegistry.registerBlock(strongBox, "strongBox");
+            GameRegistry.registerBlock(blockFlopper, "blockFlopper");
             GameRegistry.registerBlock(brightRock, "brightRock");
             GameRegistry.registerBlock(brightOre, "oreBright");
             GameRegistry.registerItem(brightSword, "swordBright");
@@ -198,17 +195,17 @@ public class BaseMod {
             GameRegistry.registerItem(coinOnethousand, "coinOnethousand");
             GameRegistry.registerItem(coinOnehundred, "coinOneHundred");
             GameRegistry.registerItem(coinTwohundred, "coinTwoHundred");
-            
             //Renderer
             RenderingRegistry.addNewArmourRendererPrefix("brightArmor");
-            
             //LanguageRegistry Declarations- Adding Names
             LanguageRegistry.addName(ironMesh, "Iron Mesh");
+            LanguageRegistry.addName(slimeBlock, "Block of Slime");
+            LanguageRegistry.addName(blockFlopper, "Flopper");
             LanguageRegistry.addName(toolHammer, "Iron Hammer");
+            LanguageRegistry.addName(sludgeBlock, "Block of Sludge");
             LanguageRegistry.addName(powderAir, "Air Powder");
             LanguageRegistry.addName(netherBrightOre, "Nether Bright Ore");
             LanguageRegistry.addName(brightNugget, "Bright Nugget");
-            //LanguageRegistry.addName(BrightGrinder, "Bright Grinder");
             LanguageRegistry.addName(strongBox, "Strong Box");
             LanguageRegistry.addName(brightRock, "Block of Bright Steel");
             LanguageRegistry.addName(brightOre, "Bright Steel Ore");
@@ -229,8 +226,8 @@ public class BaseMod {
             LanguageRegistry.addName(brightChestplate, "Bright Chestplate");
             LanguageRegistry.addName(brightLeggings, "Bright Leggings");
             LanguageRegistry.addName(brightStick, "Bright Stick");
+            LanguageRegistry.addName(sludgeDirt, "Sludge");
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabBright", "en_US", "Bright Steel");
-            
             //ItemStack Declarations
             ItemStack leatherItemstack = new ItemStack(Item.leather);
             ItemStack brownWoolItemstack = new ItemStack(Block.cloth, 1, 12);
@@ -283,8 +280,16 @@ public class BaseMod {
             ItemStack NetherBrickIS = new ItemStack(Item.netherrackBrick);
             ItemStack StringIS = new ItemStack(Item.silk);
             ItemStack DiamondIS = new ItemStack(Item.diamond);
-            
+            ItemStack sludgeIS = new ItemStack(sludgeDirt);
+            ItemStack PoisionPotatoIS = new ItemStack(Item.poisonousPotato);
+            ItemStack SludgeBlockIS = new ItemStack(this.sludgeBlock);
+            ItemStack MossyIS = new ItemStack(Block.cobblestoneMossy);
+            ItemStack slimeOutIS = new ItemStack(Item.slimeBall, 4);
+            ItemStack slimeIS = new ItemStack(Item.slimeBall);
             	//New Recipes
+            GameRegistry.addRecipe(SludgeBlockIS, "XX", "XX", 'X', sludgeIS);
+            GameRegistry.addRecipe(MossyIS, "XXX", "XZX", "XXX", 'X', Block.cobblestone, 'Z', this.sludgeBlock);
+            GameRegistry.addRecipe(sludgeIS, "YXY", "XZX", "YXY", 'Y', Block.slowSand, 'X', Block.sand, 'Z', Item.poisonousPotato);
             GameRegistry.addRecipe(NameTagIS, "XXX", "XYX", " Z ", 'X', StringIS, 'Y', DiamondIS, 'Z', SignIS);
             GameRegistry.addRecipe(DiamondHorseArmorIS, "  X", "XYX", "XXX", 'X', Item.diamond, 'Y', GoldHorseArmorIS);
             GameRegistry.addRecipe(GoldHorseArmorIS, "  X", "XYX", "XXX", 'X', Item.ingotGold, 'Y', IronHorseArmorIS);
@@ -308,7 +313,6 @@ public class BaseMod {
             GameRegistry.addRecipe(enchantingIS, "ABC", "ZYZ", "XZX", 'X', Item.diamond, 'Y', Item.swordIron, 'Z', Block.glass, 'A', Item.bone, 'B', Item.skull, 'C', Item.spiderEye);
             GameRegistry.addRecipe(skullIS, "XXX", "XZX", "XXX", 'X', Block.blockDiamond, 'Z', Item.netherrackBrick);
             GameRegistry.addRecipe(skullISI, "X X", " Z ", "X X", 'X', Item.bone, 'Z', Item.diamond);
-            
             	//Shapeless Recipes
             GameRegistry.addShapelessRecipe(StrongBoxIS, Block.chest, Block.obsidian);
             GameRegistry.addShapelessRecipe(chainIS, hammerIS, ingotIronIS);
@@ -328,12 +332,10 @@ public class BaseMod {
             GameRegistry.addShapelessRecipe(skullISIII, skullISII);
             GameRegistry.addShapelessRecipe(skullISIV, skullISIII);
             GameRegistry.addShapelessRecipe(skullISI, skullISIV);
-            GameRegistry.addShapelessRecipe(brightStickIS, Item.stick, BaseMod.BrightSteelIngot, Item.netherQuartz, lapisIS);
-            
+            GameRegistry.addShapelessRecipe(brightStickIS, Item.stick, nuggetIS, Item.netherQuartz, lapisIS);
             	//Smelting Recipes
             GameRegistry.addSmelting(this.brightOre.blockID, BrightSteelItemStack, 1.0f);
             GameRegistry.addSmelting(BaseMod.netherBrightOre.blockID, BrightSteelOre, 10.0f);
-            
             	//World Gen. Stuff
             MinecraftForge.setBlockHarvestLevel(brightOre, "Pickaxe", 3);
             GameRegistry.registerWorldGenerator(oreManager);
@@ -341,7 +343,7 @@ public class BaseMod {
            
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-            // Stub Method
+            // Stub Method, not usually used, only specific circumstances
             }
            
     }
