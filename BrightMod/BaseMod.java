@@ -72,6 +72,7 @@ public class BaseMod {
     public static int fertID = 732;
     public static int fertBlockID = 733;
     public static int slimeBlockID = 734;
+    public static int baseBlockID = 735;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -170,11 +171,13 @@ public class BaseMod {
 	public final static Block brightRock = new GlowRock(BlockCompressedID, Material.ground).setHardness(0.5f).setTextureName(ModInfo.LOC + ":BrightBlock").setStepSound(Block.soundStoneFootstep).setUnlocalizedName("brightRock").setCreativeTab(BaseMod.tabBright).setLightValue(10.0f); 	
 	public final static Block brightOre = new BrightOre(OreID, Material.rock).setTextureName(ModInfo.LOC + ":BrightOre"); 
 	public final static Block blockFlopper = new nwg.BrightMod.block.blockFlopper(flopperID, Material.iron);
+	private final Block baseBlock = new nwg.BrightMod.block.baseBlock(baseBlockID, Material.ground);
 	//public final static Block BrightGrinderActive;
     @EventHandler
     public void load(FMLInitializationEvent event) {
             proxy.registerRenderers();
             GameRegistry.registerItem(brightNugget, "nuggetBright");
+            GameRegistry.registerBlock(baseBlock, "baseBlock");
             GameRegistry.registerBlock(slimeBlock, "blockSlime");
             GameRegistry.registerBlock(sludgeBlock, "sludgeBlock");
             GameRegistry.registerItem(ironMesh, "meshIron");
@@ -339,6 +342,9 @@ public class BaseMod {
             	//World Gen. Stuff
             MinecraftForge.setBlockHarvestLevel(brightOre, "Pickaxe", 3);
             GameRegistry.registerWorldGenerator(oreManager);
+            
+            
+            
     }
            
     @EventHandler

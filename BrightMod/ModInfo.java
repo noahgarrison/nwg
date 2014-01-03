@@ -8,4 +8,5 @@ public class ModInfo {
 	public static final String CLIENTPROXY = "nwg.BrightMod.client.";
 	public static final String COMMONPROXY = "nwg.BrightMod.";
 	public static final String LOC = "brightstone";
+	public static final String CONFIRM_MESSAGE = "§9§I§OBase Location Confirmed";
 }
