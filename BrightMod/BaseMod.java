@@ -3,11 +3,16 @@ package nwg.BrightMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import nwg.BrightMod.block.BrightOre;
@@ -23,7 +28,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
  
@@ -231,6 +236,7 @@ public class BaseMod {
             LanguageRegistry.addName(brightStick, "Bright Stick");
             LanguageRegistry.addName(sludgeDirt, "Sludge");
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabBright", "en_US", "Bright Steel");
+            LanguageRegistry.instance().addStringLocalization("entity.soldierMob.name", "en_us", "Soldier");
             //ItemStack Declarations
             ItemStack leatherItemstack = new ItemStack(Item.leather);
             ItemStack brownWoolItemstack = new ItemStack(Block.cloth, 1, 12);
@@ -343,9 +349,30 @@ public class BaseMod {
             MinecraftForge.setBlockHarvestLevel(brightOre, "Pickaxe", 3);
             GameRegistry.registerWorldGenerator(oreManager);
             
+            //Soldier Renderer
+            
+            }
+    		
+           
+           void registerEntity(soldierMob, "SoldierMob", 0x2135ab, 0xacb145);
+            //broken
+           public void registerEntity(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
+                int id = EntityRegistry.findGlobalUniqueEntityId();
+
+                EntityRegistry.registerGlobalEntityID(entityClass, entityName, id);
+                EntityList.entityEggs.put(Integer.valueOf(id), new EntityEggInfo(id, bkEggColor, fgEggColor));
+        	    }
+        	   
+        	    public void addSpawn(Class<? extends EntityLiving> entityClass, int spawnProb, int min, int max, BiomeGenBase[] biomes) {
+        	    if (spawnProb > 0) {
+                     EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.creature, biomes);
+        	   }
+        	 }
+
             
             
-    }
+            
+    
            
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
