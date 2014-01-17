@@ -78,6 +78,7 @@ public class BaseMod {
     public static int fertBlockID = 733;
     public static int slimeBlockID = 734;
     public static int baseBlockID = 735;
+    public static int waterID = 736;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -165,6 +166,7 @@ public class BaseMod {
 	public static Item brightChestplate = new nwg.BrightMod.item.brightArmor(ChestplateID, brightArmor, 5, 1).setUnlocalizedName("brightChestplate");
 	public static Item brightLeggings = new nwg.BrightMod.item.brightArmor(LeggingID, brightArmor, 5, 2).setUnlocalizedName("brightLeggings");
 	public static Item brightBoot = new nwg.BrightMod.item.brightArmor(BootID, brightArmor, 5, 3).setUnlocalizedName("brightBoots");
+	public static Item freshWaterBottle = new nwg.BrightMod.item.freshWaterBottle(waterID);
 	
  	
  		//Block Declarations
@@ -190,6 +192,7 @@ public class BaseMod {
             GameRegistry.registerBlock(netherBrightOre, "oreNetherBright");
             GameRegistry.registerBlock(strongBox, "strongBox");
             GameRegistry.registerBlock(blockFlopper, "blockFlopper");
+            GameRegistry.registerItem(freshWaterBottle, "waterFresh");
             GameRegistry.registerBlock(brightRock, "brightRock");
             GameRegistry.registerBlock(brightOre, "oreBright");
             GameRegistry.registerItem(brightSword, "swordBright");
@@ -204,7 +207,7 @@ public class BaseMod {
             GameRegistry.registerItem(coinOnehundred, "coinOneHundred");
             GameRegistry.registerItem(coinTwohundred, "coinTwoHundred");
             //Renderer
-            RenderingRegistry.addNewArmourRendererPrefix("brightArmor");
+            RenderingRegistry.addNewArmourRendererPrefix(ModInfo.LOC + "brightArmor");
             //LanguageRegistry Declarations- Adding Names
             LanguageRegistry.addName(ironMesh, "Iron Mesh");
             LanguageRegistry.addName(slimeBlock, "Block of Slime");
@@ -236,7 +239,7 @@ public class BaseMod {
             LanguageRegistry.addName(brightStick, "Bright Stick");
             LanguageRegistry.addName(sludgeDirt, "Sludge");
             LanguageRegistry.instance().addStringLocalization("itemGroup.tabBright", "en_US", "Bright Steel");
-            LanguageRegistry.instance().addStringLocalization("entity.soldierMob.name", "en_us", "Soldier");
+            LanguageRegistry.instance().addStringLocalization("entity.soldierMob.name", "en_US", "Soldier");
             //ItemStack Declarations
             ItemStack leatherItemstack = new ItemStack(Item.leather);
             ItemStack brownWoolItemstack = new ItemStack(Block.cloth, 1, 12);
@@ -354,7 +357,7 @@ public class BaseMod {
             }
     		
            
-           void registerEntity(soldierMob, "SoldierMob", 0x2135ab, 0xacb145);
+          //void registerEntity(soldierMob, "SoldierMob", 0x2135ab, 0xacb145);
             //broken
            public void registerEntity(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
                 int id = EntityRegistry.findGlobalUniqueEntityId();
